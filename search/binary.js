@@ -1,6 +1,7 @@
 import isArray from 'lodash/isArray';
 import isUndefined from 'lodash/isUndefined';
 import { isSorted } from '../utils';
+
 /*
  * BINARY SEARCH
  * @Time: O(log(n) + 1) --> O(log(n))

@@ -1,10 +1,10 @@
-import { isArrayLike } from 'lodash';
+import isArrayLike from 'lodash/isArrayLike';
 
 function linearSearch( arr, v ) {
   if ( !isArrayLike( arr ) || typeof v === 'undefined' ) {
     throw new Error( 'Invalid arguments' );
   }
-  // Loop
+  // Loop and evaluate
   for ( let i = 0; i < arr.length; i++ ) {
     if ( arr[i] === v ) {
       return i;
