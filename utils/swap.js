@@ -1,15 +1,14 @@
-import isValidArray from './isValidArray';
-import isNumber from './isNumber';
+import { isArray, isInteger } from 'lodash';
 
 function swap( arr, a, b ) {
   // Validate arguments
-  if ( !isValidArray( arr ) ) {
-    throw new Error( 'Invalid arguments' );
+  if ( !isArray( arr ) ) {
+    throw new Error( 'Invalid array' );
   }
-  if ( !isNumber( a ) || arr[a] === 'undefined' ) {
+  if ( !isInteger( a ) || arr[a] === 'undefined' ) {
     throw new Error( 'First index invalid' );
   }
-  if ( !isNumber( b ) || arr[b] === 'undefined' ) {
+  if ( !isInteger( b ) || arr[b] === 'undefined' ) {
     throw new Error( 'Second index invalid' );
   }
   // Swap
