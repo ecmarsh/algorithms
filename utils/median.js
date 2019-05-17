@@ -9,9 +9,8 @@ function median( sortedArray ) {
 
   // Even length
   const _left = n / 2 - 1,
-    _right = n / 2,
-    _medianIdx = ( _left + _right ) / 2;
-  return sortedArray[_medianIdx];
+    _right = n / 2;
+  return ( sortedArray[_left] + sortedArray[_right] ) / 2;
 }
 
 export default median;
