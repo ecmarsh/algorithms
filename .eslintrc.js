@@ -23,7 +23,7 @@ module.exports = {
       },
     ],
 
-    'comma-dangle': ['error', 'never'],
+    'comma-dangle': ['error', 'always-multiline'],
 
     curly: ['error', 'all'],
 
@@ -42,7 +42,7 @@ module.exports = {
     'max-len': [
       'error',
       {
-        code: 180,
+        code: 120,
         ignoreComments: true,
         ignoreRegExpLiterals: true,
       },
@@ -54,11 +54,9 @@ module.exports = {
 
     'no-multiple-empty-lines': ['error'],
 
-    'no-spaced-func': ['error'],
+    'func-call-spacing': ['error', 'never'],
 
     'no-trailing-spaces': ['error'],
-
-    'no-undef': ['error'],
 
     'no-unexpected-multiline': ['error'],
 
@@ -79,13 +77,13 @@ module.exports = {
       },
     ],
 
-    semi: ['error', 'never'],
+    semi: ['error', 'always'],
 
     'space-before-blocks': ['error', 'always'],
 
     'space-before-function-paren': ['error', 'never'],
 
-    'space-in-parens': ['error', 'never'],
+    'space-in-parens': ['warn', 'always'],
 
     'space-unary-ops': [
       'error',
@@ -94,7 +92,7 @@ module.exports = {
         overrides: {},
       },
     ],
-    // ES6
+    // ES6 env
 
     'arrow-body-style': [
       'error',
