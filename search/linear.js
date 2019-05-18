@@ -1,6 +1,6 @@
-import isArrayLike from 'lodash/isArrayLike';
+const isArrayLike = require( 'lodash/isArrayLike' );
 
-function linearSearch( arr, v ) {
+module.exports = function linearSearch( arr, v ) {
   if ( !isArrayLike( arr ) || typeof v === 'undefined' ) {
     throw new Error( 'Invalid arguments' );
   }
@@ -13,9 +13,7 @@ function linearSearch( arr, v ) {
   }
   // Not found
   return -1;
-}
+};
 
 // [best, worst] = [O(1), O(n)]
 // Time: O(n)
-
-export default linearSearch;

@@ -1,5 +1,5 @@
-import { binarySearch } from '../search';
-import { sortedArray } from '../utils';
+const { binarySearch } = require( '../search' );
+const { sortedArray } = require( '../utils' );
 
 describe( 'binary search', () => {
   it( 'throws given unsorted array', () => {

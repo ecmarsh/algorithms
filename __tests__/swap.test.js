@@ -1,4 +1,4 @@
-import { swap, sortedArray } from '../utils';
+const { swap, sortedArray } = require( '../utils' );
 
 describe( 'swap', () => {
   const mockArray = sortedArray( 3 );

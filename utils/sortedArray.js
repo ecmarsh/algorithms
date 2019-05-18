@@ -1,4 +1,4 @@
-function sortedArray( N = 0, isFilled = true, startAtZero = true ) {
+module.exports = function sortedArray( N = 0, isFilled = true, startAtZero = true ) {
   if ( N == 0 ) {
     return [];
   }
@@ -9,6 +9,4 @@ function sortedArray( N = 0, isFilled = true, startAtZero = true ) {
     return Array.from( { length: N }, ( v, k ) => k + 1 );
   }
   return Array.from( { length: N }, ( v, k ) => k++ );
-}
-
-export default sortedArray;
+};

@@ -1,5 +1,5 @@
-import { linearSearch } from '../search';
-import { sortedArray } from '../utils';
+const { linearSearch } = require( '../search' );
+const { sortedArray } = require( '../utils' );
 
 describe( 'linear search', () => {
   const mockArray = sortedArray( 5 );

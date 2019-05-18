@@ -1,9 +1,9 @@
-import isArrayLike from 'lodash/isArrayLike';
+const isArrayLike = require( 'lodash/isArrayLike' );
 
 // NOTE: Adds an extra loop to searches/sorts
 //       but only for validation purposes
 
-function isSorted( array ) {
+module.exports = function isSorted( array ) {
   if ( !isArrayLike( array ) ) {
     return false;
   }
@@ -15,6 +15,4 @@ function isSorted( array ) {
   }
 
   return true;
-}
-
-export default isSorted;
+};

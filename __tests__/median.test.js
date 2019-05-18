@@ -1,4 +1,4 @@
-import { median, sortedArray } from '../utils';
+const { median, sortedArray } = require( '../utils' );
 
 describe( 'sorted array median', () => {
   it( 'returns median of odd length array', () => {

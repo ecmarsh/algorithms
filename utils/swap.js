@@ -1,6 +1,7 @@
-import { isArray, isInteger } from 'lodash';
+const isArray = require( 'lodash/isArray' );
+const isInteger = require( 'lodash/isInteger' );
 
-function swap( arr, a, b ) {
+module.exports = function swap( arr, a, b ) {
   // Validate arguments
   if ( !isArray( arr ) ) {
     throw new Error( 'Invalid array' );
@@ -15,6 +16,4 @@ function swap( arr, a, b ) {
   const tmp = arr[a];
   arr[a] = arr[b];
   arr[b] = tmp;
-}
-
-export default swap;
+};

@@ -1,8 +1,8 @@
-import isArray from 'lodash/isArray';
-import isUndefined from 'lodash/isUndefined';
-import { isSorted } from '../utils';
+const isArray = require( 'lodash/isArray' );
+const isUndefined = require( 'lodash/isUndefined' );
+const { isSorted } = require( '../utils' );
 
-/*
+/**
  * BINARY SEARCH
  * @Time: O(log(n) + 1) --> O(log(n))
  *
@@ -24,7 +24,7 @@ import { isSorted } from '../utils';
  *
  */
 
-function binarySearch( array, targetVal ) {
+module.exports = function binarySearch( array, targetVal ) {
   // Validate args
   if ( !isArray( array ) || isUndefined( targetVal ) ) {
     throw new Error( 'Invalid argument(s)' );
@@ -53,6 +53,4 @@ function binarySearch( array, targetVal ) {
 
   // Not found
   return -1;
-}
-
-export default binarySearch;
+};

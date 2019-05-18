@@ -1,4 +1,10 @@
-function median( sortedArray ) {
+const isSorted = require( './isSorted' );
+
+module.exports = function median( sortedArray ) {
+  if ( !isSorted( sortedArray ) ) {
+    throw new Error( 'Invalid array' );
+  }
+
   const n = sortedArray.length;
 
   // Odd length
@@ -11,6 +17,4 @@ function median( sortedArray ) {
   const _left = n / 2 - 1,
     _right = n / 2;
   return ( sortedArray[_left] + sortedArray[_right] ) / 2;
-}
-
-export default median;
+};

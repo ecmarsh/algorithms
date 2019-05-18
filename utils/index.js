@@ -1,6 +1,7 @@
-import isSorted from './isSorted';
-import sortedArray from './sortedArray';
-import median from './median';
-import swap from './swap';
+const isSorted = require( './isSorted' );
+const median = require( './median' );
+const randomArray = require( './randomArray' );
+const sortedArray = require( './sortedArray' );
+const swap = require( './swap' );
 
-export { isSorted, median, sortedArray, swap };
+module.exports = { isSorted, median, randomArray, sortedArray, swap };
