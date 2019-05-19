@@ -1,3 +1,3 @@
-const HashTable = require( './hashTable' );
+const HashTable = require( './HashTable' );
 
 module.exports = { HashTable };
