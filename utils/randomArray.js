@@ -5,15 +5,15 @@ module.exports = function randomArray( requestedLength = 8, duplicates = true ) 
   const array = [];
   while ( array.length < requestedLength ) {
     // Generate random number
-    const n = Math.ceil( Math.random() * requestedLength ** 2 );
+    const i = Math.ceil( Math.random() * requestedLength ** 2 );
 
     // Fill array
-    duplicates ? array.push( n ) : treatAsSet();
+    duplicates ? array.push( i ) : treatAsSet();
 
     function treatAsSet() {
       // Add n if not yet in array
-      if ( !array[array.findIndex( ( el ) => el === n )] ) {
-        array.push( n );
+      if ( !array[array.findIndex( ( el ) => el === i )] ) {
+        array.push( i );
       }
     }
   }

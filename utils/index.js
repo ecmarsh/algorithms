@@ -1,7 +1,8 @@
 const isSorted = require( './isSorted' );
 const median = require( './median' );
+const partition = require( './partition' );
 const randomArray = require( './randomArray' );
 const sortedArray = require( './sortedArray' );
 const swap = require( './swap' );
 
-module.exports = { isSorted, median, randomArray, sortedArray, swap };
+module.exports = { isSorted, median, partition, randomArray, sortedArray, swap };
