@@ -31,11 +31,11 @@ module.exports = function partitionLomuto( arr, low, high ) {
 };
 
 exports.partitionHoare = function( arr, low, high ) {
-  const median = Math.floor( low + ( hi - low ) / 2 );
+  const median = Math.floor( ( high - low ) / 2 );
   const pivot = arr[median];
 
   while ( low <= high ) {
-    while ( pivot > array[low] ) {
+    while ( pivot > arr[low] ) {
       low++;
     }
     while ( pivot < arr[high] ) {
