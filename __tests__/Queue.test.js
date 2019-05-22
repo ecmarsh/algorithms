@@ -8,13 +8,16 @@ describe( 'Queues', () => {
     q.init( items );
     expect( q.array ).toStrictEqual( items );
   } );
+
   it( 'peeks', () => {
     expect( q.peek ).toEqual( 1 );
   } );
+
   it( 'enqueues', () => {
     q.enqueue( 6 );
     expect( q.array.length ).toEqual( 6 );
   } );
+
   it( 'dequeues', () => {
     expect( q.dequeue() ).toEqual( 1 );
     expect( q.dequeue() ).toEqual( 2 );
