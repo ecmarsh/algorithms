@@ -10,6 +10,7 @@
     "test": "jest --watch",
     "test:all": "jest --coverage",
     "test:debug": "node --inspect-brk jest ./node_modules/jest/bin/jest.js --runInBand",
+    "coverage": "npm run test:all && open coverage/lcov-report/index.html",
     "validate": "npm run flow && npm run test:all"
   },
   "repository": {
