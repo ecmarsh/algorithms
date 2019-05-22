@@ -10,8 +10,7 @@
     "test": "jest --watch",
     "test:all": "jest --coverage",
     "test:debug": "node --inspect-brk jest ./node_modules/jest/bin/jest.js --runInBand",
-    "validate": "eslint *.js && npm run flow && npm run test:all",
-    "precommit": "lint-staged && npm run flow"
+    "validate": "npm run flow && npm run test:all"
   },
   "repository": {
     "type": "git",
