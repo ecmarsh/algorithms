@@ -119,4 +119,9 @@ const BinarySearchTree = {
   },
 };
 
+function BSTNode( value ) {
+  this.value = value;
+  this.children = [null, null];
+}
+
 module.exports = BinarySearchTree;

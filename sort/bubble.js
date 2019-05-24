@@ -5,11 +5,10 @@ const { swap } = require( '../utils' );
  * 'Bubble' iterates over entire array and swaps if out of order
  * Largest element will be on the right after one loop
  *
- * @params :: unsortedArray
- * @returns :: sortedArray
- * @helpers :: swap
- * @time :: O(n^2)
- * @space :: O(1)
+ * @param {Array} unsorted
+ * @returns {Array} sorted
+ * O-time :: O(n^2)
+ * O-space :: O(1)
  *
  * @example :: [2,1,0] --> [1,2,0] --> [1,0,2] --> [0,1,2]
  */
