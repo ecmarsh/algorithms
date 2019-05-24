@@ -7,7 +7,7 @@ const isUndefined = require( 'lodash/isUndefined' );
  *
  * Pros: Peek + Insertion is O(1)
  * Cons: Access + Search is O(1)
- * Access/Search will have O()
+ * Access/Search will have O(n)
  */
 
 const Stack = {
@@ -15,23 +15,29 @@ const Stack = {
     this.array = isArrayLike( array ) ? [...array] : [];
   },
   get buffer() {
-    // Return copy of array
-    return this.array.slice();
+    // Return copy of array O(n) (e.g slice)
+    const arrCopy = Array( this.array.length );
+    for ( let i = 0; i < arrCopy.length; i++ ) {
+      arrCopy[i] = this.array[i];
+    }
+    return arrCopy;
   },
   get isEmpty() {
     return this.array.length === 0;
   },
   get top() {
-    // Check last added item
+    // Check last added item (peek)
     return this.array[this.array.length - 1];
   },
   push( item ) {
     // Insertion
-    this.array.push( item );
+    this.array[this.array.length] = item;
   },
   pop() {
     // Deletion
-    return this.array.pop();
+    const lastElement = this.top;
+    this.array.length = this.array.length - 1;
+    return lastElement;
   },
 };
 
