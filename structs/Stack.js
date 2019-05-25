@@ -35,7 +35,7 @@ const Stack = {
   },
   pop() {
     // Deletion
-    const lastElement = this.top;
+    const lastElement = this.array[this.array.length - 1];
     this.array.length = this.array.length - 1;
     return lastElement;
   },
