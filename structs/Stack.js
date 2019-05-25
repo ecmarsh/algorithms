@@ -18,7 +18,7 @@ const Stack = {
     // Return copy of array O(n) (e.g slice)
     const arrCopy = Array( this.array.length );
     for ( let i = 0; i < arrCopy.length; i++ ) {
-      arrCopy[i] = this.array[i];
+      arrCopy[i] = JSON.parse( JSON.stringify( this.array[i] ) );
     }
     return arrCopy;
   },

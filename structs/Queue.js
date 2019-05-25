@@ -24,7 +24,11 @@ module.exports = {
   },
   get buffer() {
     // Return copy for access/search
-    return this.array.slice();
+    const copy = [];
+    for ( let i = 0; i < this.array.length; i++ ) {
+      copy[i] = JSON.parse( JSON.stringify( this.array[i] ) );
+    }
+    return copy;
   },
   get isEmpty() {
     return this.array.length === 0;
@@ -34,11 +38,17 @@ module.exports = {
     return this.array[0];
   },
   enqueue( item ) {
-    // Insertion O(1)
-    this.array.push( item );
+    // Insertion O(1)...amortized
+    this.array[this.array.length] = item;
   },
   dequeue() {
-    // Remove front
-    return this.array.shift();
+    // Remove and return first
+    const res = this.array[0];
+    let i = -1;
+    while ( ++i < this.array.length ) {
+      this.array[i] = this.array[i + 1];
+    }
+    this.array.length = this.array.length - 1;
+    return res;
   },
 };
