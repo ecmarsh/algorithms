@@ -1,6 +1,7 @@
 const { BinaryTree, BTNode } = require( './BinaryTree' );
 const BinarySearchTree = require( './BinarySearchTree' );
 const HashTable = require( './HashTable' );
+const { GraphUndirected, GraphDirected } = require( './Graph' );
 const { SinglyLinkedList, SLLNode } = require( './SinglyLinkedList' );
 const { DoublyLinkedList, DLLNode } = require( './DoublyLinkedList' );
 const { Stack, accessStack, stackHas } = require( './Stack' );
@@ -19,4 +20,6 @@ module.exports = {
   accessStack,
   stackHas,
   Queue,
+  GraphUndirected,
+  GraphDirected,
 };
