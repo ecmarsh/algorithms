@@ -1,7 +1,7 @@
 /**
  * MERGESORT
  * 1. Recursively split array in half until array length is 1 (sorted)
- * 2. Merge halves together in order by comparison into tmp array
+ * 2. Merge halves together in order by comparison into sorted array
  * @TIME :: split: log n and loop to merge --> O(n log n ); // GUARANTEED!
  * @SPACE :: O(n) <-- create n (len = 1) arrays to merge
  *
@@ -28,20 +28,22 @@ module.exports = function mergeSort( array ) {
   return array;
 
   /**
-   * Merge function
-   * close over mergeSort (splitter)
+   * Merge
+   * Input: sorted arrays L and R (length n/2 each).
+   * Output: sorted array (length n)
+   * Simplifying assumption: n is even
    */
-  function merge( leftArr, rightArr ) {
-    const tmp = []; // New array to store sorted elements
+  function merge( left, right ) {
+    const merged = []; // New array to store sorted elements
     let i = 0; // Index to add new elements
 
     // Compare left/right 1x1,
     // merge into new array in order
-    while ( leftArr.length && rightArr.length ) {
-      tmp[i++] = leftArr[0] < rightArr[0] ? leftArr.shift() : rightArr.shift();
+    while ( left.length && right.length ) {
+      merged[i++] = left[0] < right[0] ? left.shift() : right.shift();
     }
 
     // Return array with any remaining elements
-    return [...tmp, ...leftArr, ...rightArr];
+    return [...merged, ...left, ...right];
   }
 };
