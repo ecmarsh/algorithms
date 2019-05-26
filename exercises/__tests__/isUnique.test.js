@@ -1,4 +1,4 @@
-const isUnique = require( 'isUnique' );
+const isUnique = require( '../isUnique' );
 
 describe( `is unique characters problem`, () => {
   it( `returns true given all unique characters`, () => {
