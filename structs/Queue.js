@@ -19,36 +19,39 @@ const isArrayLike = require( 'lodash/isArrayLike' );
  */
 
 module.exports = {
-  init( array ) {
-    this.array = isArrayLike( array ) ? [...array] : [];
+  init( items ) {
+    this.items = isArrayLike( items ) ? [...items] : [];
   },
   get buffer() {
     // Return copy for access/search
-    const copy = [];
-    for ( let i = 0; i < this.array.length; i++ ) {
-      copy[i] = JSON.parse( JSON.stringify( this.array[i] ) );
+    // This is used for access, so if a reference
+    // is an element of this.items, avoid modifying
+    const deepCopy = [];
+    for ( let i = 0; i < this.items.length; i++ ) {
+      deepCopy[i] = JSON.parse( JSON.stringify( this.items[i] ) );
     }
-    return copy;
+    return deepCopy;
   },
   get isEmpty() {
-    return this.array.length === 0;
+    return this.items.length === 0;
   },
   get peek() {
     // Get first item O(1)
-    return this.array[0];
+    return this.items[0];
   },
-  enqueue( item ) {
-    // Insertion O(1)...amortized
-    this.array[this.array.length] = item;
+  enqueue( newItem ) {
+    // Insertion O(1) (amortized)
+    this.items[this.items.length] = newItem;
   },
   dequeue() {
     // Remove and return first
-    const res = this.array[0];
-    let i = -1;
-    while ( ++i < this.array.length ) {
-      this.array[i] = this.array[i + 1];
+    // Note: use a linked list to keep at O(1)
+    const removedElement = this.items[0];
+    let i = 0;
+    while ( i < this.items.length ) {
+      this.items[i] = this.items[++i];
     }
-    this.array.length = this.array.length - 1;
-    return res;
+    this.items.length = this.items.length - 1;
+    return removedElement;
   },
 };

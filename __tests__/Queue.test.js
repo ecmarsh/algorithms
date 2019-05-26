@@ -6,7 +6,7 @@ describe( 'Queues', () => {
   it( 'initializes', () => {
     const items = [1, 2, 3, 4, 5];
     q.init( items );
-    expect( q.array ).toStrictEqual( items );
+    expect( q.items ).toStrictEqual( items );
   } );
 
   it( 'peeks', () => {
@@ -15,7 +15,7 @@ describe( 'Queues', () => {
 
   it( 'enqueues', () => {
     q.enqueue( 6 );
-    expect( q.array.length ).toEqual( 6 );
+    expect( q.items.length ).toEqual( 6 );
   } );
 
   it( 'dequeues', () => {

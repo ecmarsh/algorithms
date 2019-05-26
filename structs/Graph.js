@@ -34,10 +34,10 @@ const GraphUndirected = ( function( Graph ) {
     this.edges[v2][v1] = weight;
   };
   _Undirected.prototype.removeEdge = function( v1, v2 ) {
-    if ( v1 in this.edges && v2 in this.edges.v1 ) {
+    if ( v1 in this.edges && v2 in this.edges[v1] ) {
       delete this.edges[v1][v2];
     }
-    if ( v2 in this.edges && v1 in this.edges.v2 ) {
+    if ( v2 in this.edges && v1 in this.edges[v2] ) {
       delete this.edges[v2][v1];
     }
   };
@@ -58,7 +58,7 @@ const GraphDirected = ( function( Graph ) {
     this.edges[tail][head] = weight;
   };
   _Directed.prototype.removeEdge = function( tail, head ) {
-    if ( tail in this.edges && head in this.edges.tail ) {
+    if ( tail in this.edges && head in this.edges[tail] ) {
       delete this.edges.tail.head;
     }
   };
