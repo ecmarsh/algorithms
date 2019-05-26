@@ -5,8 +5,9 @@
   "main": "index.js",
   "private": true,
   "scripts": {
-    "fix": "npm run validate -- --fix",
+    "fix": "eslint *.js --fix",
     "flow": "flow",
+    "reset": "rm -r -f node-modules && rm package-lock.json &&  && npm install",
     "test": "jest --watch",
     "test:all": "jest --coverage",
     "test:debug": "node --inspect-brk jest ./node_modules/jest/bin/jest.js --runInBand",
