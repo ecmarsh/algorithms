@@ -39,8 +39,11 @@ module.exports = function bf( graph, vertex, fn ) {
     const currentVertex = q.dequeue();
     if ( !visited[currentVertex] ) {
       visited[currentVertex] = true;
+
       fn( currentVertex );
+
       for ( const adjacentVertex in graph.edges[currentVertex] ) {
+
         if ( !visited[adjacentVertex] ) {
           q.enqueue( adjacentVertex );
         }

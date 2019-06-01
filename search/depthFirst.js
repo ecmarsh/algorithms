@@ -34,13 +34,17 @@ function dfs( graph, vertex, fn ) {
   function search( vtx ) {
     // 1. Mark node
     markExplored( vtx );
+
     // 2. Do something with the visited node
     fn( vtx );
+
     // 3. Search the adjacent nodes if not yet explored
     for ( const adjacentVertex in graph.edges[vtx] ) {
+
       if ( !visited[adjacentVertex] ) {
         search( adjacentVertex );
       }
+
     }
   }
 
