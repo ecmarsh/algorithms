@@ -1,11 +1,13 @@
 {
   "name": "algorithms",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "algorithms and data structure basics in javascript",
   "main": "index.js",
   "private": true,
   "scripts": {
-    "fix": "eslint *.js --fix",
+    "lint:all": "eslint --fix",
+    "lint:dry": "eslint --fix-dry-run",
+    "lint:file": "eslint --fix -- ",
     "flow": "flow",
     "reset": "rm -r -f node-modules && rm package-lock.json &&  && npm install",
     "test": "jest --watch",
@@ -23,19 +25,19 @@
     "url": "https://github.com/ethan-marsh/algorithms/issues"
   },
   "homepage": "https://github.com/ethan-marsh/algorithms#readme",
-  "devDependencies": {
+  "dependencies": {
     "@babel/core": "^7.4.4",
     "@babel/preset-env": "^7.4.4",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^24.8.0",
     "eslint": "^5.16.0",
+    "lodash": "^4.17.11"
+  },
+  "devDependencies": {
     "flow-bin": "^0.98.1",
     "husky": "^2.3.0",
     "jest": "^24.8.0",
     "jest-cli": "^24.8.0",
     "lint-staged": "^8.1.7"
-  },
-  "dependencies": {
-    "lodash": "^4.17.11"
   }
 }
