@@ -7,7 +7,7 @@
   "scripts": {
     "lint:all": "eslint --fix",
     "lint:dry": "eslint --fix-dry-run",
-    "lint:file": "eslint --fix -- ",
+    "lint:file": "eslint --fix --",
     "flow": "flow",
     "reset": "rm -r -f node-modules && rm package-lock.json &&  && npm install",
     "test": "jest --watch",
