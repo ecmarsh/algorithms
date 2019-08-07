@@ -34,7 +34,7 @@ module.exports = function addTwoNumbers( l1, l2 ) {
   let node = buffer,
     carry = 0;
 
-  while ( l1 !== null || l2 !== null ) {
+  while ( l1 || l2 ) {
     const x = l1 ? l1.val : 0,
       y = l2 ? l2.val : 0,
       sum = carry + x + y;
