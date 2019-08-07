@@ -10,6 +10,19 @@
  * return the K-th indexed symbol in row N.
  *
  * Note the values of K and N are 1-indexed.
+ *
+ * @examples
+ * N=1, K=1 -> O
+ * N=2, K=1 -> 0
+ * N=2, K=2 -> 1
+ * N=4, K=5 -> 1
+ *
+ * Explanation:
+ * row 1: 0
+ * row 2: 01
+ * row 3: 0110
+ * row 4: 01101001
+ *
  */
 
 /**
