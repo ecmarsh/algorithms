@@ -107,11 +107,10 @@ function three( n ) {
  * e.g 10->'Ten', 11->'Eleven', 99->'Ninety Nine'
  */
 function two( n ) {
-  const isZero = n === 0,
-        isOnes = n < 10,
+  const isOnes = n < 10,
         isTeens = n < 20;
 
-  if ( isZero ) return '';
+  if ( isZero( n ) ) return '';
   if ( isOnes ) return one( n );
   if ( isTeens ) return teen( n );
 
