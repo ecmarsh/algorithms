@@ -1,8 +1,9 @@
-import bubbleSort from './bubble';
-import countSort from './count';
-import insertionSort from './insertion';
-import mergeSort from './merge';
-import quickSort from './quick';
-import selectionSort from './selection';
+const bubbleSort = require( './bubble' );
+const countSort = require( './count' );
+const insertionSort = require( './insertion' );
+const mergeSort = require( './merge' );
+const quickSort = require( './quick' );
+const selectionSort = require( './selection' );
+const DGTopologicalSort = require( './topological' );
 
-export { bubbleSort, countSort, insertionSort, mergeSort, quickSort, selectionSort };
+module.exports = { bubbleSort, countSort, insertionSort, mergeSort, quickSort, selectionSort,  DGTopologicalSort };
