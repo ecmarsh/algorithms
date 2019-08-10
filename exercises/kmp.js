@@ -67,6 +67,9 @@ module.exports.KMP = function KMP( str, pattern ) {
 
     // Check if at end of pattern
     // which means it is a complete match.
+    // Note: The actual advantage of KMP is we can
+    // store s as a match and continue to search
+    // for other matches.
     if ( p === pLen ) {
       return true;
     }
@@ -94,24 +97,26 @@ function buildPrefixTable( s ) {
     return [];
   }
 
-  const prefix = Array( size );
+  const prefixTable = Array( size );
 
-  let maxPrefix = 0;
-  prefix[0] = maxPrefix;
+  let longestPrefix = 0;
+  prefixTable[0] = longestPrefix;
 
   for ( let i = 1; i < size; i++ ) {
-    const isMismatch = () => maxPrefix  && s[i] !== s[maxPrefix];
-    while ( isMismatch() ) {
-      maxPrefix = prefix[maxPrefix - 1];
+    const char = s[i];
+
+    while ( longestPrefix > 0 && char !== s[longestPrefix] ) {
+      longestPrefix = prefixTable[longestPrefix - 1];
     }
 
-    if ( s[i] === s[maxPrefix] ) {
-      maxPrefix++;
+    if ( char === s[longestPrefix] ) {
+      longestPrefix++;
     }
 
-    prefix[i] = maxPrefix;
+    prefixTable[i] = longestPrefix;
   }
-  return prefix;
+
+  return prefixTable;
 }
 
 module.exports.buildPrefixTable = buildPrefixTable;
