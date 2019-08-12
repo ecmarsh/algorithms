@@ -18,7 +18,7 @@ const { isPrime } = require( '../utils' );
  *
  */
 
-module.exports = {
+const HashTable = {
   init( size ) {
     if ( isPrime( size ) ) {
       this.size = size;
@@ -73,3 +73,5 @@ module.exports = {
     this.items++;
   },
 };
+
+module.exports = HashTable;
