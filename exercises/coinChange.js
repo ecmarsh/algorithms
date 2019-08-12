@@ -61,6 +61,23 @@ module.exports = function coinChange( coins, amount ) {
   return dp[amount] <= amount ? dp[amount] : -1;
 };
 
+/**
+ * Slower, but more readable implementation.
+ */
+module.exports._coinChange = function _coinChange( coins, amount ) {
+  const max = amount + 1,
+    dp = [0].concat( Array( amount ).fill( max ) );
+
+  for ( let i = 1; i < max; i++ ) {
+    for ( let c = 0; c < coins.length; c++ ) {
+      if ( coins[c] <= i )
+        dp[i] = Math.min( dp[i], 1 + dp[i - coins[c]] );
+    }
+  }
+
+  return dp[amount] > amount ? -1 : dp[amount];
+};
+
 /*
 DP
 coins=[1, 2, 5], amount=3
