@@ -21,7 +21,7 @@ module.exports = {
       },
     ],
     'comma-dangle': ['error', 'always-multiline'],
-    curly: ['error', 'all'],
+    curly: ['off'],
     'eol-last': ['error'],
     indent: [
       'error',
