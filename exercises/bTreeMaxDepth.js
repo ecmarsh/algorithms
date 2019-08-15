@@ -20,25 +20,25 @@
  */
 
 module.exports = function maxDepth( root ) {
+  if ( !root ) {
+    return 0;
+  }
 
-  const queue = [];
-  let depth = 0; // depth counter
+  let depth = 0;
+  const queue = [root];
 
-  // Handle no tree
-  if ( !root ) { return depth; }
-
-  // Init traversal
-  queue.push( root );
-
-  // level order traversal
+  // Do Level-Order Traversal until max-depth.
   while ( queue.length ) {
-    const size = queue.length;
     depth++;
 
-    for ( let i = 0; i < size; i++ ) {
-      const currVtx = queue.shift();
-      if ( currVtx.left ) { queue.push( currVtx.left ); }
-      if ( currVtx.right ) { queue.push( currVtx.right ); }
+    // We need to empty the queue since one
+    // iteration of the while loop is a level.
+    // If !left or !right in iteration, we've reached the end.
+    for ( let i = 0; i < queue.length; i++ ) {
+      const node = queue.shift();
+
+      node.left && queue.push( node.left );
+      node.right && queue.push( node.right );
     }
   }
 
