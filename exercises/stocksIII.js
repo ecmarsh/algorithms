@@ -68,3 +68,22 @@ module.exports = function maxProfit( prices ) {
 
   return maxTotalProfit;
 };
+
+/**
+ * Follow-Up: Can you do it on O(1) space?
+ */
+module.exports.maxProfitVariant = function maxProfitVariant( prices ) {
+  let firstBuy = Infinity,
+    firstProfit = 0,
+    secondBuy = Infinity,
+    totalProfit = 0;
+
+  for ( const price of prices ) {
+    firstBuy = Math.min( firstBuy, price );
+    firstProfit = Math.max( firstProfit, price - firstBuy );
+    secondBuy = Math.min( secondBuy, price - firstProfit );
+    totalProfit = Math.max( totalProfit, price - secondBuy );
+  }
+
+  return totalProfit;
+};
