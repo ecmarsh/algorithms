@@ -44,7 +44,8 @@ module.exports.subarraySumBrute = function subarraySumBrute( nums, k ) {
 
 /**
  * Linear time solution with O(n) with O(n) space.
- * See notes following function for inductions.
+ * See notes following function for inductions, and
+ * cumulative sum function for step solution.
  *
  * @param {number[]} nums
  * @param {number} k
@@ -103,5 +104,33 @@ map:    // sum-k   ->                 numArrays
 
 Time: O(n)
 Space: O(n)
-
 */
+
+/**
+ * This optimal solution is one step away from this solution
+ * that uses the difference of cumulative sums at each i.
+ *
+ * Below we use cumulativeSum[hi] - cumulativeSum[lo] for subarray sum.
+ *
+ * In optimal solution we defer to cumSum[lo] in preSum map,
+ * and after some algebra, use cumSum[hi] - k == cumSum[lo]
+ */
+/* eslint-disable no-unused-vars */
+function subarraySumsWithCumulativeSum( nums, k ) {
+  const len = nums.length,
+    cumSum = [0];
+
+  let count = 0;
+
+  // Build cumulative sums at each i
+  for ( let i = 1; i < len; i++ )
+    cumSum[i] = cumSum[i-1] + nums[i-1];
+
+  // Check cumSums[i:j] for match to sum.
+  // ie: sum(nums[i:j]) = cumSum[j+1] - cumSum[i]
+  for ( let i = 0; i < len; i++ )
+    for ( let j = i + 1; j < len; j++ )
+      count += +( cumSum[j] - cumSum[i] === k );
+
+  return count;
+}
