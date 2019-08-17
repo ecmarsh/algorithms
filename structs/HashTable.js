@@ -14,7 +14,17 @@ const { isPrime } = require( '../utils' );
  * Use quadratic probing or double hashing to avoid collisions
  * Linear probing with no second hash can result in clusters
  *
- * Example of hash table in use: localStorage
+ * Example of hash table in use: localStorage.
+ *
+ * Load factor = n/k where n is entries stored, k buckets in hash table.
+ * - Values closer to 0 means less entries in table,
+ *   which means possible wasted memory if not doing much for search.
+ * - As load factory approaches 1, or grows larger (entries being filled),
+ *   the hash table becomes much slower.
+ * - Java uses default load factor of 0.75 for its hash table implementation.
+ * - Some proper implementations set an upper bound for load factor,
+ *   and double the number of buckets once bound is reached,
+ *   thereby halving load.
  *
  */
 
