@@ -17,8 +17,10 @@
  * Explanation: ['battab','tabbat']
  *
  * Analysis:
- * Time: O()
- * Space: O()
+ * N is # of words
+ * k is length of longest word (for upper bound). Avg length for average case.
+ * Time: 2(N * k^2) <-building + searching trie = O(N*k^2)
+ * Space: O(  ), trie
  *
  */
 
@@ -28,4 +30,45 @@
  */
 module.exports = function palindromePairs( words ) {
 
+};
+
+/**
+ * Validates a string for palindrome fulfillment.
+ * Time: O(k), where k is length of word.
+ */
+const isPalindrome = word => {
+  let left = 0, right = word.length - 1;
+  while ( left <= right ) {
+    if ( word[left] !== word[right] ) {
+      return false;
+    }
+    left++; right--;
+  }
+  return true;
+};
+
+
+/**
+ * Palindrome Pairs Brute Force Solution
+ * Accepted, but at very unreasonable runtime.
+ * O(N^2 * k) runtime - See @pseudocode at bottom for deets.
+ * O(N) space
+ *
+ * @param {string[]} words
+ * @return {number[][]}
+ */
+module.exports.bruteForce = function bruteForce( words ) {
+  const wordMap = {};
+  words.forEach( ( word, i ) => {
+    wordMap[word] = i;
+  } );
+
+  const pairs = [];
+  words.forEach( ( w1, i ) => {
+    for ( const w2 in wordMap )
+      if ( w1 !== w2 && isPalindrome( w1 + w2 ) )
+        pairs.push( [i, wordMap[w2]] );
+  } );
+
+  return pairs;
 };
