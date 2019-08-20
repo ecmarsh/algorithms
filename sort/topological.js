@@ -15,7 +15,8 @@
  */
 
 /**
- * Basic definition for directed graph.
+ * Defines a DirectedGraph with edges,
+ * and methods to add vertices and edges.
  */
 function DirectedGraph() {
   this.edges = {};
@@ -44,21 +45,17 @@ DirectedGraph.prototype.topologicalSort = function() {
   const helper = v => {
     visited.set( v );
 
-    for ( const item in this.edges[v] ) {
-      if ( !visited.has( item ) ) {
-        helper( item, visited, stack );
-      }
-    }
+    for ( const item in this.edges[v] )
+      if ( !visited.has( item ) )
+        helper( item );
 
-    // Use `unshift` to retain chronological order
+    // Append left to sustain chronological order.
     stack.unshift( v );
   };
 
-  for ( const item in this.edges ) {
-    if ( !visited.has( item ) ) {
+  for ( const item in this.edges )
+    if ( !visited.has( item ) )
       helper( item );
-    }
-  }
 
   return stack;
 };
