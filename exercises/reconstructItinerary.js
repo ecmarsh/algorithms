@@ -28,7 +28,10 @@
  * but it is larger in lexographical order.
  *
  * **Analysis**
- * Time: O(V+E), alternative O(E log E) since popping and pushing each edge?
+ * E = edges = 2 * len(tickets)
+ * Time: O(E^2) in below implementation or O(E log E) with sort.
+ * For this case, below implemenation is practically quicker
+ * than sorting tickets in reverse before hand even though better Big O.
  * Space: O(E), the stack.
  *
  */
@@ -43,9 +46,7 @@ module.exports = function findItinerary( tickets ) {
     if ( !flights.has( from ) ) {
       flights.set( from, [] );
     }
-
-    // Store in descending order since we
-    // will be popping off items.
+    // Store in descending order since popping right.
     let i = 0;
     const destinations = flights.get( from );
     while ( i < destinations.length && to < destinations[i] ) {
@@ -149,5 +150,23 @@ Repeat with remaining flights from stack.
 Once all flights are gone, the route will have the order of the flights.
 
 Also called Hierholzer's Algorithm.
+
+Analysis:
+E = edges = Ticket.length*2
+
+Space: O(E) for map with all airports visited
+Time:
+Build: O(E)
+Worst case is back and forth with ascending order,
+and have to go to end of "to's" list every time
+= E so E*E = E^2
+
+For making route:
+E + E - 1 + E-2, ... 1 -> E
+E^2 + E -> E^2
+
+Technically can sort in reverse before (assume E log E ) instead
+of nested insertion to make time E log E, but average case
+the insertion method performs better.
 
 */
