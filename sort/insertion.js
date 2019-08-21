@@ -1,5 +1,4 @@
 const isArray = require( 'lodash/isArray' );
-const { swap } = require( '../utils' );
 
 /**
  * INSERTION SORT
