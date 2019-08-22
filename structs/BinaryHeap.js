@@ -59,8 +59,11 @@ class Heap {
    */
   poll() {
     const minOrMax = this.getNode( 0 );
-    this.nodes[0] = this.nodes.pop();
-    this.bubbleDown();
+    const popped = this.nodes.pop();
+    if ( this.size() ) {
+      this.nodes[0] = popped;
+      this.bubbleDown();
+    }
     return minOrMax;
   }
 
