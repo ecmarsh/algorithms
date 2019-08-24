@@ -45,10 +45,10 @@ module.exports = function sortList( head ) {
 
   partition.next = null;
 
-  const leftHalf = sortList( head );
-  const rightHalf = sortList( slow );
-
-  return merge( leftHalf, rightHalf );
+  return merge(
+    sortList( head ),
+    sortList( slow )
+  );
 };
 
 const merge = ( left, right ) => {
