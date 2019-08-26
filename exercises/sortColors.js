@@ -30,18 +30,22 @@ module.exports = function sortColors( nums ) {
     return;
   }
 
-  let red = 0, blue = nums.length - 1;
+  let red = 0, // '0'
+    i = 0, // curr, '1'
+    blue = nums.length - 1; // '2'
 
-  for ( let i = red; i < nums.length; i++ ) {
-    while ( nums[i] === 2 && blue > i )
-      swap( nums, i, blue-- );
-    while ( nums[i] === 0 && red < i )
-      swap( nums, i, red++ );
+  while ( i <= blue ) {
+    if ( nums[i] === 0 ) {
+      swap( nums, i, red );
+      red++;
+      i++;
+    }
+    else if ( nums[i] === 2 ) {
+      swap( nums, i, blue );
+      blue--;
+    }
+    else {
+      i++;
+    }
   }
 };
-
-/*
-Forward scan -> swap items less than 1 to beginning, inc ptr
-Backward scan -> swap items greater than 1 to end, dec ptr
-  - Stop at where forward scan was
-*/
