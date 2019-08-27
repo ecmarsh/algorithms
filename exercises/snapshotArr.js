@@ -68,8 +68,10 @@ SnapshotArray.prototype.get = function( index, snapId ) {
       return curr[index];
     }
   }
-  // Expecting an initialized array with 0's
-  // This is to imitate that without storing the actual array.
+
+  // Reminder: the initial "array" is filled with 0's:
+  //  Assume if there are no logged changes or "snaps",
+  //  it's still 0.
   return 0;
 };
 
