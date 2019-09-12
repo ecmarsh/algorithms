@@ -31,7 +31,12 @@
  * @return {number}
  */
 module.exports = function jumpGameII( nums ) {
-  nums.pop(); // We don't care about last index
+  /**
+     * nums[lastIdx] is useless to solution
+     * this also allows for easier comparison:
+     * target index to reach is new len(nums), n
+     */
+  nums.pop();
 
   const n = nums.length;
 
@@ -46,11 +51,13 @@ module.exports = function jumpGameII( nums ) {
     jumpTo = farthest;
   };
 
-  // A slight improvement is to break out (with diff iter method)
-  // as soon as farthest >= nums.length - 1 (or len after pop)
-  nums.forEach( ( num, i ) => {
-    farthest = Math.max( farthest, i + nums[i] );
-    i === jumpTo && jump();
+  nums.every( ( num, i ) => {
+    farthest = Math.max( farthest, i + num );
+    if ( i === jumpTo || farthest >= n ) {
+      jump();
+    }
+    // break early if target reached
+    return farthest < n;
   } );
 
   return jumpCount;
