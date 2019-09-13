@@ -19,7 +19,7 @@
  * Analysis:
  * N is len(nums)
  * Time: O(N)
- * Space: O(1/2 N) => O(N) <-- Implicit stack space
+ * Space: O(log N) <-- Implicit stack space
  *
  */
 
