@@ -9,7 +9,7 @@
     "lint:dry": "eslint --fix-dry-run",
     "lint:file": "eslint --fix --",
     "flow": "flow",
-    "reset": "rm -r -f node-modules && rm package-lock.json &&  && npm install",
+    "reset": "rm -rf node-modules/ && rm package-lock.json && npm install",
     "test": "jest --watch",
     "test:all": "jest --coverage",
     "test:debug": "node --inspect-brk jest ./node_modules/jest/bin/jest.js --runInBand",
@@ -18,13 +18,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ethan-marsh/algorithms.git"
+    "url": "git+https://github.com/ecmarsh/algorithms.git"
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ethan-marsh/algorithms/issues"
+    "url": "https://github.com/ecmarsh/algorithms/issues"
   },
-  "homepage": "https://github.com/ethan-marsh/algorithms#readme",
+  "homepage": "https://github.com/ecmarsh/algorithms#readme",
   "dependencies": {
     "@babel/core": "^7.4.4",
     "@babel/preset-env": "^7.4.4",
