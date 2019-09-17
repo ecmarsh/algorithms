@@ -130,7 +130,7 @@ function subarraySumsWithCumulativeSum( nums, k ) {
   // ie: sum(nums[i:j]) = cumSum[j+1] - cumSum[i]
   for ( let i = 0; i < len; i++ )
     for ( let j = i + 1; j < len; j++ )
-      count += +( cumSum[j] - cumSum[i] === k );
+      count += +( cumSum[j] - nums[i] === k );
 
   return count;
 }
