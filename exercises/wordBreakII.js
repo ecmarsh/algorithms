@@ -95,3 +95,36 @@ module.exports = function wordBreak( str, wordDict ) {
 
   return decompositions;
 };
+
+/**
+ * TODO: Big O vs above
+ */
+module.exports.dfsSolution = function decompose( s, wordDict, memo=new Map() ) {
+  if ( memo.has( s ) ) {
+    return memo.get( s );
+  }
+  if ( s === '' ) {
+    return [];
+  }
+
+  const decompositions = [];
+
+  for ( const word of wordDict ) {
+    if ( !s.startsWith( word ) ) {
+      continue;
+    }
+    if ( s.length === word.length ) {
+      decompositions.push( word );
+      continue;
+    }
+
+    const wordBreak = s.slice( word.length );
+    const matchesAfterWord = decompose( wordBreak, wordDict, memo );
+    matchesAfterWord.forEach( ( wordPart ) => {
+      decompositions.push( `${word} ${wordPart}` );
+    } );
+  }
+
+  memo.set( s, decompositions );
+  return decompositions;
+};
