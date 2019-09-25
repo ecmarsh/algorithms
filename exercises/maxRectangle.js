@@ -1,3 +1,4 @@
+const getMaxFromHistogram = require( './maxRectangleInHistogram' );
 /**
  * Maximum Rectangle
  *
@@ -17,7 +18,7 @@
  * Analysis (Optimal Solution)
  * N = rows (matrix.length). M = cols (matrix[i].length) where 0 <= i < N
  * Time: O(N * (M + M)) = O(N * M)
- * Space: O(M) Heights histogram for each col.
+ * Space: O(M) Heights histogram for each col. + O(M) (stack in helper) = O(M)
  *
  */
 
@@ -43,36 +44,6 @@ module.exports.optimal = function maxRectangle( matrix ) {
   return maxArea;
 };
 
-/**
- * See https://leetcode.com/problems/largest-rectangle-in-histogram/
- * @param {number[]} heights
- * @return {number}
- */
-function getMaxFromHistogram( heights ) {
-  const s = [-1];
-  s.peek = () => s[s.length -1];
-
-  let maxArea = 0;
-  const updateMaxArea = ( col ) => {
-    const height = heights[s.pop()];
-    const width = col - s.peek() - 1;
-    maxArea = Math.max( maxArea, width * height );
-  };
-
-  heights.forEach( ( height, i ) => {
-    while ( s.peek() !== -1 && heights[s.peek()] >= height ) {
-      updateMaxArea( i );
-    }
-    s.push( i );
-  } );
-
-  // Repeat for final row
-  while ( s.peek() !== -1 ) {
-    updateMaxArea( heights.length );
-  }
-
-  return maxArea;
-}
 
 /**
  * Brute Force Analysis:
