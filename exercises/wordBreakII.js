@@ -39,8 +39,21 @@
  * s = "catsandog", wordDict = ["cats", "dog", "sand", "and", "cat"]
  * Output: []
  *
- * Analysis: TODO
- *
+ * Analysis (1st Submission)
+ * D is words in wordDict, S is chars in str
+ * Worst case will be when every character can form a combo:
+ *  'aaaa' and ['a', 'aa', 'aaa', 'aaaa']
+ * Time: O(S^S + (S^2 * D))
+ *  - O(D) convert word dict to map
+ *  - O(S^S) for case above to find indices
+ *  - O(S^2) Build decompositions
+ * Space: O(S^3 + D)
+ *  - O(D) store word dict
+ *  - O(S!) last lengths: [[1][1,2][1,2,3][1,2,3,4]]
+ *          Note: create substrings but throwaways. and max would be O(S)
+ *  - O(S) implicit stack space in recursive call to build decomps
+ *  - O(S^2) substrings on stack at one time in creating decompositions
+ *  - O(S^2) output array of decompositions
  */
 
 /**
@@ -97,7 +110,9 @@ module.exports = function wordBreak( str, wordDict ) {
 };
 
 /**
- * TODO: Big O vs above
+ *  D is words in wordDict, S is chars in str
+ * Time: O(D^2 * S) Recursion tree can get to D^2 and + S for prefix checks/mem
+ * Space: O(D^2 * S) Recursion tree plus string recursion results.
  */
 module.exports.dfsSolution = function decompose( s, wordDict, memo=new Map() ) {
   if ( memo.has( s ) ) {
