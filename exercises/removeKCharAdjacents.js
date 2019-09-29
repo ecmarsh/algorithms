@@ -32,12 +32,14 @@
  * Input: s = "pbbcggttciiippooaais", k = 2
  * Output: "ps"
  *
- * Analysis:
+ * Analysis for nonoptimal submission:
  * n is len(s), k is K
  * Worst case when all separated: e.g "abcddcba", k=2
  * T(n) = n + (n - k) + (n - 2k) ... + k = n^2/k
  * S(n) = n/k times * n/k substrings = n^2/k^2
  *  - Recursion, but TCO or eliminate with while loop.
+ *
+ * See better O(N)/ O(N) nested-stack solution after.
  */
 
 /**
@@ -82,4 +84,41 @@ const remove = ( s, k ) => {
   // Else possible duplicates from combined portions so repeat.
   const strRes = res.join( '' );
   return strRes === s.length ? strRes : remove( strRes, k );
+};
+
+/**
+ * O(N) solution with O(N) space
+ * @param {string} s
+ * @param {number} k
+ * @return {string}
+ */
+module.exports.optimized = function removeDuplicatesII( s, k ) {
+  if ( k === 1 ) {
+    return '';
+  }
+
+  const stack = [];
+  const buffer = ['_', 0];
+  stack.peek = function peek() {
+    return stack.length === 0 ? buffer : stack[stack.length - 1];
+  };
+
+  for ( let i = 0; i < s.length; i += 1 ) {
+    const curChar = s.charAt( i );
+    const top = stack.peek();
+    const [prevChar, prevCharCount] = top;
+    if ( prevChar === curChar ) {
+      if ( ( prevCharCount + 1 ) === k ) {
+        stack.pop();
+      } else {
+        top[1] += 1;
+      }
+    } else {
+      stack.push( [curChar, 1] );
+    }
+  }
+
+  const sBuilder = stack.map( ( [char, count] ) => char.repeat( count ) );
+
+  return sBuilder.join( '' );
 };
