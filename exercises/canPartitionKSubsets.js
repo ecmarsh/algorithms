@@ -48,11 +48,11 @@ module.exports = function canPartitionKSubsets( nums, k ) {
   subsetSum.forEach( ( curSum, curSet ) => {
     // If partial subset not valid, no reason to check with more
     if ( !canPartition[curSet] ) return;
-    nums.every( ( num, j ) => {
+    nums.every( ( num, i ) => {
       // If bit is already set, continue
       // Otherwise, check with j'th bit set
-      if ( curSet & ( 1 << j ) ) return true;
-      const newSet = curSet | 1 << j;
+      if ( curSet & ( 1 << i ) ) return true;
+      const newSet = curSet | 1 << i;
       // If number will not make lead to valid partition, break
       if ( num > targetSum - ( curSum % targetSum ) ) return false;
       // Otherwise it could be valid partition
