@@ -87,7 +87,9 @@ The LIS is the number of active lists in the end.
 module.exports.dp = function( nums ) {
   if ( !nums || !nums.length ) return 0;
 
-  let maxLen = 1; // LIS is at least 1 since each number is an LIS itself.
+  // LIS is at least 1 since each number is an LIS itself.
+  let maxLen = 1;
+  // dp[i] represents longest increasing subsequence at nums[i]
   const dp = Array( nums.length ).fill( 1 );
 
   for ( let i = 1; i < nums.length; i++ ) {
