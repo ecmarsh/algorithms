@@ -75,3 +75,29 @@ Case 3. If A[i] is in between, find a list with
 The LIS is the number of active lists in the end.
 
 */
+
+/**
+ * DP solution. At each index, check all previous numbers and update length
+ * if previous number is smaller. Store max on each update.
+ * Time is O(n^2), space is O(n).
+ *
+ * @param {number[]} nums
+ * @return {number} length of longest increasing subsequence.
+ */
+module.exports.dp = function( nums ) {
+  if ( !nums || !nums.length ) return 0;
+
+  let maxLen = 1; // LIS is at least 1 since each number is an LIS itself.
+  const dp = Array( nums.length ).fill( 1 );
+
+  for ( let i = 1; i < nums.length; i++ ) {
+    for ( let j = 0; j < i; j++ ) {
+      if ( nums[j] < nums[i] && dp[j] >= dp[i] ) {
+        dp[i] = dp[j] + 1;  		    // Update LIS at i
+        maxLen = Math.max( maxLen, dp[i] ); // Maintain max
+      }
+    }
+  }
+
+  return maxLen;
+};
