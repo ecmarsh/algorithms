@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 /**
  * Prime Arrangements
  * _Weekly Contest 152_

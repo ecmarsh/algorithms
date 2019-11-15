@@ -37,18 +37,16 @@ function DirectedGraph() {
 
 DirectedGraph.prototype.topologicalSort = function() {
   // Ensures recursion terminates
-  const visited = new Map(); // eslint-disable-line no-undef
+  const visited = new Map();
 
   // Records order, must remain chronological
   const stack = [];
 
   const helper = v => {
     visited.set( v );
-
-    for ( const item in this.edges[v] )
-      if ( !visited.has( item ) )
-        helper( item );
-
+    for ( const edge in this.edges[v] )
+      if ( !visited.has( edge ) )
+        helper( edge );
     // Append left to sustain chronological order.
     stack.unshift( v );
   };

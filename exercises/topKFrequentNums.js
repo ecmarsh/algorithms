@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 /**
  * Top K Frequent Elements
  *

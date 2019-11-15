@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 /**
  * Dinner Plate Stacks
  * _Weekly Contest 151_

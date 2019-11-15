@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 /**
  * Word Ladder
  *

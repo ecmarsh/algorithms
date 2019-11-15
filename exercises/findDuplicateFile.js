@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 /**
  * Find Duplicate File in System ( Dropbox )
  *

@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 /**
  * Longest Well-Performing Interval
  *
@@ -46,7 +45,7 @@ module.exports = function longestWPI( hours ) {
   hours.reduce( ( acc, cur, i ) => {
     // +1 if tiring (>8), -1 if not-tiring (<=8)
     acc += ( cur > 8 ) - ( cur <= 8 );
-    // set 'prefix sum' at index only if first occurence
+    // set 'prefix sum' at index only if first occurrence
     map.has( acc ) || map.set( acc, i );
     // if i is positive, entire array is valid
     // otherwise else look for lowest M[i] | i < j and M[i]+1 == M[j]

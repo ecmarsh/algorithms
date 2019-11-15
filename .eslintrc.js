@@ -1,16 +1,20 @@
 module.exports = {
   extends: ['eslint:recommended'],
   env: {
+    es6: true,
     node: true,
     jest: true,
   },
   parser: 'babel-eslint',
   parserOptions: {
-    ecmaVersion: 2018,
+    ecmaVersion: 2020,
     ecmaFeatures: {
       impliedStrict: true,
       objectLiteralDuplicateProperties: false,
     },
+  },
+  globals: {
+    BigInt: true
   },
   rules: {
     'array-bracket-spacing': ['error', 'never'],
