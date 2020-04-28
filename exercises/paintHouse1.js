@@ -30,18 +30,36 @@
  *
  * Recursion with memoization: Recursive, but memoize the repeated calculations with a map, cutting down the time to O(n) since there are 3 colors -> 3*n sets of parameters so can't be more than 3*2*n searches in memoization. Paint cost run time is O(1) as a conditional, so 6*n -> O(n). Space becomes 3*2*n + n -> 12n -> O(n).
  *
- * Dynamic Programming: TODO
+ * Dynamic Programming: Starting from the last house, calculate "bottom up" the minimum cost from each color, only keeping track of the previous total costs. At the end, the first row holds the min cost of each color, so choose the min value of that. Time is 3*n -> O(n) and since we only keep track of one row, space is O(2*3) -> O(1). Note that even though only one variable, actually two temporarily in memory during the map phase.
+ *
  */
 
 const COLORS = [0, 1, 2];
-// const [RED, GREEN, BLUE] = colors;
 
 /**
  * @param {number[][]} costs
  * @return {number}
  */
-module.exports = function minCost( costs ) {
-  // TODO
+module.exports.dp = function minCostDP( costs ) {
+  if ( !costs || !costs.length ) return 0;
+
+  // Use last house as initial dp row
+  let totalCosts = Array.prototype.slice.call( costs[costs.length-1] );
+
+  // From the second to the first, update the total min cost for each color,
+  // adding the lower cost between the two colors that weren't the previous row.
+  for ( let i = costs.length - 2; i >= 0; i -= 1 ) {
+    totalCosts = costs[i].map( ( colorCost, color ) =>
+      colorCost + Math.min(
+        ...COLORS
+          .filter( c  => c !== color )
+          .map( c => totalCosts[c] )
+      )
+    );
+  }
+
+  // At the end, first row has the minimum costs of all options; choose the minimum
+  return Math.min( ...totalCosts );
 };
 
 
