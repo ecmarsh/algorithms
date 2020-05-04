@@ -41,7 +41,7 @@ module.exports = function lengthOfLIS( nums ) {
   return lis;
 };
 
-const bisect = function( A, lo, hi, x ) {
+const bisect = function ( A, lo, hi, x ) {
   while ( lo < hi ) {
     const mid = ( hi + lo ) >> 1;
     if ( A[mid] < x ) {
@@ -84,7 +84,7 @@ The LIS is the number of active lists in the end.
  * @param {number[]} nums
  * @return {number} length of longest increasing subsequence.
  */
-module.exports.dp = function( nums ) {
+module.exports.dp = function ( nums ) {
   if ( !nums || !nums.length ) return 0;
 
   // LIS is at least 1 since each number is an LIS itself.
