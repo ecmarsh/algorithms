@@ -45,9 +45,10 @@
  * Output: 3
  *
  * @complexity
- * Let:
- * Time:
- * Space:
+ * Let: E = trust.length (number of trust relationships), N = number of people
+ * Time: O(E) -> O(E) to count degrees + O(E) to find judge
+ *  - worst case last person or no judge
+ * Space: O(N) -> one array to store the degrees of each person
  */
 
 /**
@@ -56,5 +57,24 @@
  * @return {number}
  */
 module.exports = function findJudge( N, trust ) {
+  // Town judge must have at least N+1 incoming,
+  // so if not enough edges, then can't be a town judge.
+  if ( trust.length < N-1 ) {
+    return -1;
+  }
 
+  const degrees = Array( N ).fill( 0 );
+
+  // trust[i] = [a, b], where person a trust person b
+  // so trust relationship is a directed edge from a->b
+  // note working with array indexes, so subtract one
+  trust.forEach( ( [truster, trustee] ) => {
+    degrees[truster-1] -= 1; // gives trust
+    degrees[trustee-1] += 1; // earns trust
+  } );
+
+  // townjudge indegrees = N - 1
+  // townjudge outdegrees = 0
+  // townjudge degreeCount = N-1
+  return degrees.findIndex( d => d === N-1 ) + 1 || -1;
 };
