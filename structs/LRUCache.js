@@ -39,7 +39,7 @@
 function LRUCache( capacity ) {
   return {
     capacity,
-    cache: new Map(),
+    cache: new Map(), // js map stored in order
   };
 }
 
@@ -70,7 +70,8 @@ LRUCache.prototype.put = function( key, value ) {
   }
 
   if ( this.cache.size === this.capacity ) {
-    const { value: oldestKey } = this.cache.keys().next();
+    // Returns a map iterator
+    const [oldestKey] = this.cache.entries().next().value;
     this.cache.delete( oldestKey );
   }
 
