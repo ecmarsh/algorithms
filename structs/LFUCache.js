@@ -64,7 +64,7 @@ LFUList.prototype.removeNode = function( node ) {
 function LFUCache( capacity ) {
   return {
     keys: {}, // LFUNodes,
-    freq: {}, /// LFUList,
+    freq: {}, // LFUList,
     capacity,
     minFreq: 0,
     size: 0,
