@@ -43,13 +43,13 @@ const isEmpty = require( 'lodash/isEmpty' );
  */
 function DirectedGraph() {
   this.edges = {};
-  this.addVertex = function( label ) {
+  this.addVertex = function ( label ) {
     if ( !this.edges[label] ) {
       this.edges[label] = {};
     }
     return this.edges;
   };
-  this.addEdge = function( tail, head, weight ) {
+  this.addEdge = function ( tail, head, weight ) {
     if ( !this.edges[tail] || !this.edges[head] ) {
       throw TypeError( 'Vertex does not exist. Add the vertex first.' );
     }
@@ -106,7 +106,7 @@ DG.edges ->
  *
  * Note distance from source to source will always be 0.
  */
-DirectedGraph.prototype.Dijkstra = function( source ) {
+DirectedGraph.prototype.Dijkstra = function ( source ) {
   const Q = {}, // Vertex set
     distances = {};
 
