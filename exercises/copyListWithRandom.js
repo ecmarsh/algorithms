@@ -45,9 +45,14 @@ module.exports = function copyListWithRandom( head ) {
     }
 
     const copy = new Node( node.val );
+
+    // IMPORTANT: Need to set the node in the map, before recursing
+    // or we'll run into an infinite loop since the node will never be set.
     copies.set( node, copy );
+
     copy.next = getOrMakeCopy( node.next );
     copy.random = getOrMakeCopy( node.random );
+
     return copy;
   };
 
