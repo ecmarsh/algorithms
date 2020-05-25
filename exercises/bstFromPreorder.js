@@ -38,6 +38,27 @@ function TreeNode( val, left, right ) {
   this.right = ( right===undefined ? null : right );
 }
 
+/*
+  PREORDER: N L R
+  preorder = [];
+  const traverse = (node) => {
+      if (!node) return;
+      preorder.push(node.val);
+      traverse(node.left);
+      traverse(node.right);
+  }
+
+  1. Root first node -> push it to stack
+  2. Loop through preorder array
+      - Top of stack is parent and arr[i] is child
+      - Pop stack while child is smaller than parent
+      - Compare values
+          - node.val < child.val: node.right = child
+          - else: node.left = child
+      - Push child node on to stack
+
+  */
+
 /**
  * @param {number[]} preorder
  * @return {TreeNode}
@@ -77,23 +98,50 @@ module.exports = function bstFromPreorder( preorder ) {
   return root;
 };
 
+
 /*
-  PREORDER: N L R
-  preorder = [];
-  const traverse = (node) => {
-      if (!node) return;
-      preorder.push(node.val);
-      traverse(node.left);
-      traverse(node.right);
-  }
 
-  1. Root first node -> push it to stack
-  2. Loop through preorder array
-      - Top of stack is parent and arr[i] is child
-      - Pop stack while child is smaller than parent
-      - Compare values
-          - node.val < child.val: node.right = child
-          - else: node.left = child
-      - Push child node on to stack
+Recursive with example [8,5,1,7,10,12]
 
-  */
+Each node tries to construct from bounds of parent node,
+and bounds become more restricted as you move down the tree.
+
+8: left[0-8], right[8-Inf]
+5: left[0-5], right[5-8],
+1: left[0-1], right[1-5]
+7: left[5-7], right[7-8]
+10: left[8-10], right[10-Inf]
+12: left[10-12], right[12-Inf]
+
+*/
+
+module.exports.recursive = function bstFromPreorderRecursive( preorder ) {
+  let i = 0; // index in preorder
+
+  // Use lower and upper bounds to determine
+  // placement in tree.
+  const construct = ( lo, hi ) => {
+    if ( i >= preorder.length ) return null;
+
+    const currVal = preorder[i];
+
+    // A child node must be between the bounds.
+    if ( currVal < lo || currVal > hi ) {
+      return null;
+    }
+
+    // If it is between the bounds, it's safe to increment
+    // since we can place (left or right) according to BST logic.
+    const node = new TreeNode( currVal );
+    i += 1;
+
+    node.left = construct( lo, currVal );
+    node.right = construct( currVal, hi );
+
+    return node;
+  };
+
+  // Start bounds outside of constraints
+  return construct( 0, 10**8 + 1 );
+};
+
