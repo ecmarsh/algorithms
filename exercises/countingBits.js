@@ -1,5 +1,7 @@
 /**
- * Counting Bits
+ * @lc id=338 lang=javascript tag=bits,dp,hamming,popcount
+ *
+ * [338] Counting Bits
  *
  * Given a non-negative integer `num`, for every number `i`,
  * where `0 <= i <= num`, calculate the number of 1's in thei
@@ -13,7 +15,7 @@
  * Input: 5
  * Output: [0,1,1,2,1,2]
  *
- * @complexity:
+ * @complexity
  * Time: O(n), where n is input, num
  * Space: O(n) only for output
  */
@@ -24,7 +26,7 @@
  * @param {number} num
  * @return {number[]}
  */
-module.exports.leastSignificantBit = function( num ) {
+module.exports.leastSignificantBit = function ( num ) {
   const dp = [0];
   for ( let i = 1; i < num + 1; i++ ) {
     dp[i] = dp[i >> 1] + ( i & 1 );
@@ -39,11 +41,11 @@ module.exports.leastSignificantBit = function( num ) {
  * @param {number} num
  * @return {number[]}
  */
-module.exports.lastSetBit = function( num ) {
+module.exports.lastSetBit = function ( num ) {
   const dp = [0];
   for ( let i = 1; i < num + 1; i++ ) {
-    dp[i] = dp[i & ( i - 1 )] + 1;
+    const lastSetBitToZero = i & ( i - 1 );
+    dp[i] = dp[lastSetBitToZero] + 1;
   }
   return dp;
 };
-
