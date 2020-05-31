@@ -88,7 +88,7 @@ function makeGrid( r, c ) {
  * Same idea, but using min(w1, w2) space
  * by only storing the previous row.
  */
-module.exports._editDistance = function( w1, w2 ) {
+module.exports._editDistance = function ( w1, w2 ) {
   if ( !w1 || !w2 )
     return w1.length || w2.length;
 
@@ -182,3 +182,76 @@ PSUEDO
 4. Return edit distance for full string -> grid[w1][w2]
 
 */
+
+
+/**
+ * Recursive solution
+ * Time: O(3^(m+n)) -> Each branches off to 3 choices and it can be adding or removing characters.
+ */
+exports.recursiveSolution = function minDistRecursive( s1, s2, m=new Map ) {
+  if ( s1 === s2 ) return 0;
+  // If ones an empty string, need to delete all characters to match.
+  if ( !s1 || !s2 ) return Math.max( s1.length, s2.length );
+
+  // TLE: Need to use map to memoize returned lengths
+  const k = `${s1}||${s2}`;
+  if ( m.has( k ) ) return m.get( k );
+
+  const deleteS1 = s1.slice( 1 );
+  const deleteS2 = s2.slice( 1 );
+  // replace same as is delete both s1/s2 for price of 1
+  // insert same as deleting s2, keeping s1 + 1
+
+  // Replace: (deletes1, deletes2) + 1
+  // Delete: (deletes1, s2) + 1
+  // Insert: (s1, deletes2) + 1
+
+  // If first characters are equal, min distance is going to be
+  // min distance of two sliced characters, and don't need to add one.
+  if ( s1[0] === s2[0] ) {
+    const minDist = minDistRecursive( deleteS1, deleteS2, m );
+    m.set( k, minDist );
+    return minDist;
+  }
+
+  const minDist = 1 + Math.min(
+    minDistRecursive( deleteS1, deleteS2, m ), // replace character
+    minDistRecursive( deleteS1, s2, m ), // delete char from s1
+    minDistRecursive( s1, deleteS2, m ), // insert s2 char to s1, then move forward
+  );
+  m.set( k, minDist );
+
+  return minDist;
+};
+
+/*
+Recursive Scratch:
+
+ horse, ros
+    d1: orse
+    d2: os
+
+    rse,s
+    d1: se
+    d2: ''
+
+
+    (se,'') + 1 = 3
+    (rse,'') + 1 = 4
+    (se,s) + 1 = 2
+
+    se,s
+
+    horse,ros 1 + 3 = 4
+    /
+ ed(h,r) + min(ed(orse,os)
+                \
+              ed(o,o) + ed(rse,s)
+                        /
+                 min(ed(r,s) + ed(se,s), 1+ed(rse,''), 1+ed(srse,s))
+                           \
+                  ed(r,s) + ed('se', '')     4           4
+                      1   +   2
+*/
+
+
