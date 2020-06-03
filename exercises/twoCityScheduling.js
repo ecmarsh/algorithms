@@ -27,8 +27,8 @@
  *     have half the people interviewing in each city.
  *
  * @complexity
- * Time:
- * Space:
+ * Time: O(N log N) to sort data, where N is number of people
+ * Space: O(1)
  */
 
 /**
@@ -36,5 +36,34 @@
  * @return {number}
  */
 exports.default = function twoCitySchedCost( costs ) {
+  // The key value in determining the cost for the company is determing,
+  // for each person, where it will cost more to send them to A or B.
+  // We can take the difference of the two as a comparison. (p[0] - p[1]).
+  // So if sending to city A is cheaper, our price will be negative.
+  // We can sort each person by this factor, and we know that the first
+  // N people will be the cheapest to send to city A. Then we can send
+  // the rest to city B.
 
+  const twoN = costs.length;
+  const N = twoN >> 1;
+
+  costs.sort( ( [a1, b1], [a2, b2] ) => ( a1 - b1 ) - ( a2 - b2 ) );
+
+  let totalCost = 0;
+
+  // Send the lowest cost to city A.
+  // We know that the first N people, after sorting, will
+  // be the least amount of money spent to send them to city A.
+  for ( let i = 0; i < N; i++ ) {
+    const costToCityA = costs[i][0];
+    totalCost += costToCityA;
+  }
+
+  // Now send the rest of the people to city B.
+  for ( let i = N; i < twoN; i++ ) {
+    const costToCityB = costs[i][1];
+    totalCost += costToCityB;
+  }
+
+  return totalCost;
 };
