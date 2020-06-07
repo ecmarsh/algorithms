@@ -33,9 +33,9 @@
  * Output: 1
  *
  * @complexity
- * Let:
- * Time: O()
- * Space: O()
+ * Let: N = number of coins (coins.length), A = amount
+ * Time: O(N * Amount)
+ * Space: O(amount)
  */
 
 /**
@@ -44,5 +44,71 @@
  * @return {number}
  */
 module.exports = function coinChange( amount, coins ) {
+  // NOTE: doesn't matter if coins are sorted because we are going
+  // to loop through all of them anyway.
 
+  const ways = Array( amount + 1 ).fill( 0 );
+  ways[0] = 1;
+
+  for ( let i = 0; i < coins.length; i++ ) {
+    const coin = coins[i];
+    // We work upwards to avoid duplicate combinations.
+    // See recursive tree showing duplicates.
+    for ( let curAmt = coin; curAmt <= amount; curAmt += 1 ) {
+      ways[curAmt] += ways[curAmt - coin];
+    }
+  }
+
+  return ways[amount];
 };
+
+
+// Recursive Solution (TLE)
+// sort + O(coins.length ^ 2) ?
+module.exports.recursive = function changeRecursive( amount, coins ) {
+  let ways = 0;
+  // Ensure coins in ascending order
+  coins.sort( ( a, b ) => a - b );
+
+  function count( remain, i ) {
+    // Base case, we've found a way to make our amount
+    if ( remain === 0 ) return ++ways;
+    // Starting from current coin, work backwards and get counts
+    // We need to maintain an order to avoid duplicate combo orders.
+    for ( i; i >= 0; i-- )
+      if ( remain - coins[i] >= 0 )
+        count( remain - coins[i], i );
+  }
+
+  count( amount, coins.length - 1 );
+
+  return ways;
+};
+
+
+/*
+
+[1,2,5], 5
+
+        5
+    5/  2\  1\
+   0    3    4
+ +1   2/ 1\
+      1    2
+     1/   2| 1\
+     0    0   1
+     +1 . +1  +1 * we dup here, 3 should be 2
+                   dont allow dups by not allowing numbers larger than cur
+
+amt = 1,
+[1,0,0,0,0]
+[1,2,3,]
+
+
+[0,1,2]
+
+[1,2,5], 11
+[]
+
+*/
+
